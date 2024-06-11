@@ -1,36 +1,37 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Project: Next.js Starter Boilerplate (app folder version)
+
+This project is configured with essential libraries and settings as a starter boilerplate. It’s designed to expedite the initialization phase by offering a pre-configured setup, eliminating the need for manual configuration.
 
 ## Getting Started
 
-First, run the development server:
+1. Run the development server: You can start the development server using one of the following commands:
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+   ```bash
+   npm run dev
+   # or
+   yarn dev
+   # or
+   pnpm dev
+   # or
+   bun dev
+   ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+   Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+2. Editing the Page: You can start editing the main page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+3. Font Optimization: This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load the Inter font (a custom Google Font).
 
-## Learn More
+## Code Quality and Best Practices
 
-To learn more about Next.js, take a look at the following resources:
+This project is set up to ensure high code quality and adherence to best practices, including clean code, DRY, and SOLID principles. It is configured with ESLint, Jest, React Testing Library, Cypress for end-to-end testing, and Husky for pre-commit linting and testing.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+- **ESLint**: Ensures your code follows best practices and style guidelines.
+- **Jest**: A testing framework for JavaScript, providing robust testing capabilities, including:
+  - **Unit Tests**: Test individual units of code, such as functions or methods.
+  - **Integration Tests**: Test the interaction between different parts of the application.
+- **React Testing Library**: Helps you write maintainable tests for your React components, focusing on:
+  - **Component Tests**: Test the rendering and behavior of React components.
+  - **User Interaction Tests**: Simulate user interactions and test the UI response.
+- **Cypress**: A tool for end-to-end testing that simulates real user interactions in the browser.
+- **Husky**: Hooks into Git pre-commit to run linting and testing scripts, ensuring code quality before committing.
