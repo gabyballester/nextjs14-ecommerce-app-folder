@@ -49,6 +49,7 @@ module.exports = {
         objectLiteralTypeAssertions: 'never',
       },
     ],
+    "@typescript-eslint/no-namespace": "off",
     // React rules
     'react/jsx-fragments': ['warn', 'syntax'], // Shorthand syntax for React fragments
     'react/jsx-filename-extension': [

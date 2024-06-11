@@ -13,7 +13,8 @@
     "test:watchAll": "jest --watchAll --coverage",
     "pre-commit": "npx lint-staged && npm run test:all:coverage",
     "prettier": "prettier --write */**/*.{js,jsx,json,ts,tsx,scss,css,md}",
-    "prepare": "husky"
+    "prepare": "husky",
+    "cypress:open": "cypress open"
   },
   "dependencies": {
     "next": "14.2.3",
@@ -30,6 +31,7 @@
     "@types/react-dom": "^18",
     "@typescript-eslint/eslint-plugin": "^7.13.0",
     "@typescript-eslint/parser": "^7.13.0",
+    "cypress": "^13.11.0",
     "eslint": "^8.57.0",
     "eslint-config-next": "^14.2.3",
     "eslint-config-prettier": "^9.1.0",
