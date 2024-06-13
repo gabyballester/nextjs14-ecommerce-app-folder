@@ -1,14 +1,15 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
-import { ThemeProvider } from "@/components/theme-provider";
+// import { ThemeProvider } from "@/components/theme-provider";
+import { ClerkProvider } from "@clerk/nextjs";
 
 import "./globals.css";
 
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Boilerplate",
-  description: "Nextjs 14",
+  title: "Admin Dashboard",
+  description: "Admin Dashboard",
 };
 
 export default function RootLayout({
@@ -17,18 +18,21 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body className={inter.className}>
-        <ThemeProvider
+    <ClerkProvider>
+      <html lang="en">
+        <body className={inter.className}>
+          {children}
+          {/* <ThemeProvider
           enableSystem
           attribute="class"
           defaultTheme="system"
-          disableTransitionOnChange
+          // disableTransitionOnChange
           themes={["orange", "orange-dark", "light", "dark"]}
         >
           {children}
-        </ThemeProvider>
-      </body>
-    </html>
+        </ThemeProvider> */}
+        </body>
+      </html>
+    </ClerkProvider>
   );
 }

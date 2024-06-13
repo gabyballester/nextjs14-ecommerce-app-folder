@@ -1,6 +1,6 @@
-# Project: Next.js Starter Boilerplate (app folder version)
+# Project: Next.js Ecomerce Platform (app folder version)
 
-This project is configured with essential libraries and settings as a starter boilerplate. It’s designed to expedite the initialization phase by offering a pre-configured setup, eliminating the need for manual configuration.
+The primary objective of this project is to develop an E-commerce Platform designed for deep learning with Next.js 14 and associated technologies. It will feature robust authentication mechanisms and an extensive dashboard for efficient management of products and orders.
 
 ## Getting Started
 
@@ -24,14 +24,27 @@ This project is configured with essential libraries and settings as a starter bo
 
 ## Code Quality and Best Practices
 
-This project is set up to ensure high code quality and adherence to best practices, including clean code, DRY, and SOLID principles. It is configured with ESLint, Jest, React Testing Library, Cypress for end-to-end testing, and Husky for pre-commit linting and testing.
+The platform ensures high code quality and follows best practices. It’s configured with ESLint, Jest, React Testing Library, Cypress, and Husky.
 
-- **ESLint**: Ensures your code follows best practices and style guidelines.
-- **Jest**: A testing framework for JavaScript, providing robust testing capabilities, including:
+### Base libraries used
+
+- **ESLint**: Maintains code quality and style guidelines.
+- **Jest**: Provides testing capabilities for unit and integration tests.
   - **Unit Tests**: Test individual units of code, such as functions or methods.
   - **Integration Tests**: Test the interaction between different parts of the application.
-- **React Testing Library**: Helps you write maintainable tests for your React components, focusing on:
+- **React Testing Library**: Facilitates maintainable tests for React components, focusing on:
   - **Component Tests**: Test the rendering and behavior of React components.
   - **User Interaction Tests**: Simulate user interactions and test the UI response.
-- **Cypress**: A tool for end-to-end testing that simulates real user interactions in the browser.
-- **Husky**: Hooks into Git pre-commit to run linting and testing scripts, ensuring code quality before committing.
+- **Cypress**: Offers end-to-end testing by simulating real user interactions.
+- **Husky**: Runs linting and testing scripts before code commit.
+
+## Other libraries used
+
+The platform leverages several libraries for enhanced functionality.
+
+- **Shadcn**: A versatile UI component library that provides a set of high-quality React components, perfect for building a responsive and accessible ecommerce interface. It offers a range of components from basic buttons to complex navigation systems, all designed with customization and ease-of-use in mind.
+
+- **Clerk**: A comprehensive user management and authentication system that simplifies adding secure sign-in and sign-up functionalities to your application. It features email and password authentication, social logins, multi-factor authentication, and more, with an easy integration process.
+
+These libraries are integral to providing a seamless and secure shopping experience for users.
+
