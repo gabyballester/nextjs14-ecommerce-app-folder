@@ -32,7 +32,7 @@ module.exports = {
     'prefer-const': 'warn',
     'no-var': 'warn',
     'no-unused-vars': 'warn',
-    "indent": ["error", 2],
+    // "indent": ["warn", 2],
     'object-shorthand': 'warn',
     'quote-props': ['warn', 'as-needed'],
     // TypeScript rules

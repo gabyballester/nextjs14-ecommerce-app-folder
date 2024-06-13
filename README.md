@@ -38,13 +38,28 @@ The platform ensures high code quality and follows best practices. It’s config
 - **Cypress**: Offers end-to-end testing by simulating real user interactions.
 - **Husky**: Runs linting and testing scripts before code commit.
 
-## Other libraries used
+## Components and styling
 
-The platform leverages several libraries for enhanced functionality.
+This project uses tailwind, custom themes and **Shadcn** components which is a UI components source that provides a set of customizable high-quality React components, perfect for building responsive projects. It offers a range of components from basic buttons to complex navigation systems, all designed with customization and ease-of-use in mind.
 
-- **Shadcn**: A versatile UI component library that provides a set of high-quality React components, perfect for building a responsive and accessible ecommerce interface. It offers a range of components from basic buttons to complex navigation systems, all designed with customization and ease-of-use in mind.
+## Authentication
 
-- **Clerk**: A comprehensive user management and authentication system that simplifies adding secure sign-in and sign-up functionalities to your application. It features email and password authentication, social logins, multi-factor authentication, and more, with an easy integration process.
+Uses **Clerk** library, a comprehensive user management and authentication system, to simplify adding secure sign-in and sign-up functionalities to your application. Clerk offers features such as email and password authentication, social logins, multi-factor authentication, and more, with an easy integration process.
+
+## Libraries for State Management
+
+Zustand is a small, fast, and scalable state management solution with a comfortable API based on hooks. It is neither boilerplate-heavy nor opinionated but has enough convention to be explicit and flux-like.
+
+## Form Handling
+
+### Elements
+
+**Shadcn** in combination with **React Hook Form** provides performant, flexible, and extensible form handling tools.
+
+React Hook Form offers an intuitive API for building forms with minimal re-renders. It leverages existing HTML markup and validates forms using a constraint-based validation API.
+
+### Form validation
+
+**Zod** is a TypeScript-first schema declaration and validation library designed to eliminate duplicative type declarations. It allows developers to declare a validator once, and Zod will automatically infer the corresponding static TypeScript type.
 
 These libraries are integral to providing a seamless and secure shopping experience for users.
-
