@@ -1,10 +1,9 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
-// import { ThemeProvider } from "@/components/theme-provider";
 import { ClerkProvider } from "@clerk/nextjs";
+import { ModalProvider, ToastProvider } from "@/providers";
 
 import "@/app/globals.css";
-import { ModalProvider } from "@/providers/modal-provider";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -22,9 +21,19 @@ export default function RootLayout({
     <ClerkProvider>
       <html lang="en">
         <body className={inter.className}>
+          <ToastProvider />
           <ModalProvider />
           {children}
-          {/* <ThemeProvider
+        </body>
+      </html>
+    </ClerkProvider>
+  );
+}
+
+// TODO: Borrar?
+// import { ThemeProvider } from "@/providers/theme-provider";
+
+/* <ThemeProvider
           enableSystem
           attribute="class"
           defaultTheme="system"
@@ -32,9 +41,4 @@ export default function RootLayout({
           themes={["orange", "orange-dark", "light", "dark"]}
         >
           {children}
-        </ThemeProvider> */}
-        </body>
-      </html>
-    </ClerkProvider>
-  );
-}
+        </ThemeProvider> */

@@ -11,7 +11,8 @@
     "test:all:coverage": "jest --coverage",
     "test:watch": "jest --watch --coverage",
     "test:watchAll": "jest --watchAll --coverage",
-    "pre-commit": "npx lint-staged && npm run test:all:coverage",
+    "pre-commit": "npx lint-staged",
+    "allTests": "npm run test:all:coverage",
     "prettier": "prettier --write */**/*.{js,jsx,json,ts,tsx,scss,css,md}",
     "prepare": "husky",
     "cypress:open": "cypress open"
@@ -34,6 +35,7 @@
     "react": "^18",
     "react-dom": "^18",
     "react-hook-form": "^7.51.5",
+    "react-hot-toast": "^2.4.1",
     "tailwind-merge": "^2.3.0",
     "tailwindcss-animate": "^1.0.7",
     "zod": "^3.23.8",

@@ -84,6 +84,12 @@ Prisma enhances the Next.js application by streamlining database operations. Its
 
 PostgreSQL provides a reliable and powerful database system. It ensures data integrity and supports complex queries, offering the robustness needed for the backend of a full-stack application.
 
+#### DB commands
+
+- Reset and clean up: `npx prisma migrate reset`
+- Generate client: `npx prisma generate`
+- Sync DB: `npx prisma db push`
+
 ### Supabase: Real-Time Serverless DB Platform
 
 Supabase brings real-time capabilities and easy-to-use authentication to the project. It accelerates development with instant APIs and simplifies user management, greatly enhancing the overall user experience.
