@@ -1,10 +1,11 @@
 "use client";
 
 import { useState } from "react";
+import { useParams } from "next/navigation";
+import axios from "axios";
 import * as z from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import axios from "axios";
 import toast from "react-hot-toast";
 import { useStoreModal } from "@/hooks/use-store-modal";
 
@@ -25,6 +26,7 @@ const formSchema = z.object({
 });
 
 export const StoreModal = () => {
+  const params = useParams();
   const { isOpen, onClose } = useStoreModal();
   const [loading, setLoading] = useState<boolean>(false);
 
@@ -42,8 +44,12 @@ export const StoreModal = () => {
       const response = await axios.post("api/stores", values);
       if (response.statusText !== "OK") throw new Error();
 
-      window.location.assign(`/${response.data.id}`);
-      // toast.success("Store created.");
+      toast.success("Store created.");
+      //redirecciona a la actual
+      window.location.assign(`/${params?.storeId}`);
+      //redirecciona a la creada
+      // window.location.assign(`/${response.data.id}`);
+      onClose();
     } catch (error) {
       toast.error("Something went wrong");
     } finally {
