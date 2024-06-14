@@ -25,7 +25,7 @@ const formSchema = z.object({
 });
 
 export const StoreModal = () => {
-  const storeModal = useStoreModal();
+  const { isOpen, onClose } = useStoreModal();
   const [loading, setLoading] = useState<boolean>(false);
 
   const form = useForm<z.infer<typeof formSchema>>({
@@ -40,9 +40,10 @@ export const StoreModal = () => {
       setLoading(false);
 
       const response = await axios.post("api/stores", values);
-      if (response.statusText !== "OK") throw new Error("Result not ok");
+      if (response.statusText !== "OK") throw new Error();
 
-      toast.success("Store created.");
+      window.location.assign(`/${response.data.id}`);
+      // toast.success("Store created.");
     } catch (error) {
       toast.error("Something went wrong");
     } finally {
@@ -54,8 +55,8 @@ export const StoreModal = () => {
     <Modal
       title="Create Store"
       description="Add a new store to manage products and categories"
-      isOpen={storeModal.isOpen}
-      onClose={() => storeModal.onClose}
+      isOpen={isOpen}
+      onClose={() => onClose}
     >
       <div>
         <div className="space-y-4 py-2 pb-4">
@@ -79,11 +80,7 @@ export const StoreModal = () => {
                 )}
               />
               <div className="flex items-center justify-end space-x-2 pt-6">
-                <Button
-                  disabled={loading}
-                  variant="outline"
-                  onClick={storeModal.onClose}
-                >
+                <Button disabled={loading} variant="outline" onClick={onClose}>
                   Cancel
                 </Button>
                 <Button disabled={loading} type="submit">

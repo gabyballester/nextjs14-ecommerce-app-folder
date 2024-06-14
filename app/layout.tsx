@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
-// import { ThemeProvider } from "@/providers/theme-provider";
 import { ClerkProvider } from "@clerk/nextjs";
 import { ModalProvider, ToastProvider } from "@/providers";
 
@@ -25,7 +24,16 @@ export default function RootLayout({
           <ToastProvider />
           <ModalProvider />
           {children}
-          {/* <ThemeProvider
+        </body>
+      </html>
+    </ClerkProvider>
+  );
+}
+
+// TODO: Borrar?
+// import { ThemeProvider } from "@/providers/theme-provider";
+
+/* <ThemeProvider
           enableSystem
           attribute="class"
           defaultTheme="system"
@@ -33,9 +41,4 @@ export default function RootLayout({
           themes={["orange", "orange-dark", "light", "dark"]}
         >
           {children}
-        </ThemeProvider> */}
-        </body>
-      </html>
-    </ClerkProvider>
-  );
-}
+        </ThemeProvider> */
