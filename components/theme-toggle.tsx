@@ -12,7 +12,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui";
 
-import { capitalize } from "@/lib/utils";
+import { capitalize } from "@/lib";
 
 export function ThemeToggle() {
   const { themes, setTheme } = useTheme();

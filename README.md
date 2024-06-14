@@ -1,6 +1,6 @@
 # Project: Next.js Ecomerce Platform (app folder version)
 
-The primary objective of this project is to develop an E-commerce Platform designed for deep learning with Next.js 14 and associated technologies. It will feature robust authentication mechanisms and an extensive dashboard for efficient management of products and orders.
+The primary objective of this project is to develop an E-commerce Platform utilizing Next.js 14 and associated technologies. The platform will feature robust authentication mechanisms and an extensive dashboard for efficient management of products and orders. This tech stack ensures the platform can handle complex database operations efficiently while maintaining scalability and robustness.
 
 ## Getting Started
 
@@ -40,26 +40,54 @@ The platform ensures high code quality and follows best practices. It’s config
 
 ## Components and styling
 
-This project uses tailwind, custom themes and **Shadcn** components which is a UI components source that provides a set of customizable high-quality React components, perfect for building responsive projects. It offers a range of components from basic buttons to complex navigation systems, all designed with customization and ease-of-use in mind.
+This project uses Tailwind CSS, custom themes, Shadcn components, and react-hot-toast for notifications.
+
+### Tailwind CSS and Custom Themes
+
+Tailwind CSS allows for rapid UI development with utility-first CSS. Custom themes ensure the application has a unique and consistent look and feel.
+
+### Shadcn Components
+
+Shadcn provides a set of customizable, high-quality React components, perfect for building responsive projects. It offers a range of components from basic buttons to complex navigation systems, all designed for customization and ease of use.
+
+### React-Hot-Toast
+
+React-Hot-Toast is used to display user-friendly notifications and response messages. This library makes it easy to provide real-time feedback to users with elegant and customizable toast messages.
 
 ## Authentication
 
-Uses **Clerk** library, a comprehensive user management and authentication system, to simplify adding secure sign-in and sign-up functionalities to your application. Clerk offers features such as email and password authentication, social logins, multi-factor authentication, and more, with an easy integration process.
+The project uses the **Clerk** library, a comprehensive user management and authentication system. Clerk simplifies adding secure sign-in and sign-up functionalities to your application, offering features such as email and password authentication, social logins, multi-factor authentication, and more.
 
 ## Libraries for State Management
 
-Zustand is a small, fast, and scalable state management solution with a comfortable API based on hooks. It is neither boilerplate-heavy nor opinionated but has enough convention to be explicit and flux-like.
+**Zustand** is used for state management. It is a small, fast, and scalable solution with a comfortable API based on hooks, providing enough convention to be explicit and flux-like without being boilerplate-heavy or opinionated.
 
 ## Form Handling
 
 ### Elements
 
-**Shadcn** in combination with **React Hook Form** provides performant, flexible, and extensible form handling tools.
-
-React Hook Form offers an intuitive API for building forms with minimal re-renders. It leverages existing HTML markup and validates forms using a constraint-based validation API.
+**Shadcn** in combination with **React Hook Form** provides performant, flexible, and extensible form handling tools. React Hook Form offers an intuitive API for building forms with minimal re-renders, leveraging existing HTML markup and validating forms using a constraint-based validation API.
 
 ### Form validation
 
-**Zod** is a TypeScript-first schema declaration and validation library designed to eliminate duplicative type declarations. It allows developers to declare a validator once, and Zod will automatically infer the corresponding static TypeScript type.
+**Zod** is a TypeScript-first schema declaration and validation library. It eliminates duplicative type declarations by allowing developers to declare a validator once, with Zod automatically inferring the corresponding static TypeScript type.
 
-These libraries are integral to providing a seamless and secure shopping experience for users.
+## Database Management
+
+By integrating Prisma, PostgreSQL, and Supabase, the project creates a scalable, secure, and developer-friendly environment. This integration allows focus on building feature-rich applications with Next.js, combining efficient database management, real-time interactions, and modern web development.
+
+### Prisma: Intuitive ORM for Efficient Data Handling
+
+Prisma enhances the Next.js application by streamlining database operations. Its intuitive ORM framework makes data access and manipulation more efficient and type-safe, maintaining the integrity of the application’s data layer.
+
+### PostgreSQL: Robust Database System for Complex Queries
+
+PostgreSQL provides a reliable and powerful database system. It ensures data integrity and supports complex queries, offering the robustness needed for the backend of a full-stack application.
+
+### Supabase: Real-Time Serverless DB Platform
+
+Supabase brings real-time capabilities and easy-to-use authentication to the project. It accelerates development with instant APIs and simplifies user management, greatly enhancing the overall user experience.
+
+## To Sum Up
+
+By using this stack, the E-commerce platform will provide a seamless and secure shopping experience for users, ensuring scalability and robustness while efficiently handling complex database operations.
