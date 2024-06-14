@@ -5,6 +5,7 @@ import * as z from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import axios from "axios";
+import toast from "react-hot-toast";
 import { useStoreModal } from "@/hooks/use-store-modal";
 
 import {
@@ -23,12 +24,6 @@ const formSchema = z.object({
   name: z.string().min(1),
 });
 
-// const baseUrl = "http://localhost:3000/api";
-
-// const endpoint = {
-//   stores: "/stores",
-// };
-
 export const StoreModal = () => {
   const storeModal = useStoreModal();
   const [loading, setLoading] = useState<boolean>(false);
@@ -43,22 +38,13 @@ export const StoreModal = () => {
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     try {
       setLoading(false);
-      // const response = await axios.get(baseUrl + endpoint.stores);
-      const response = await axios.post("api/stores", values);
-      console.log(response);
 
-      // status: 200
-      // statusText: "OK"
-      // data: {
-      //   createdAt: "2024-06-14T11:07:04.083Z";
-      //   id: "4b72d105-4a52-49e2-8d06-bee5900b584a";
-      //   name: "asdfasdf";
-      //   updatedAt: "2024-06-14T11:07:04.083Z";
-      //   userId: "user_2hooOC1uU7VskShExxX8i2I6ggd";
-      // }
+      const response = await axios.post("api/stores", values);
+      if (response.statusText !== "OK") throw new Error("Result not ok");
+
+      toast.success("Store created.");
     } catch (error) {
-      console.log(error);
-      throw new Error(`${error}`);
+      toast.error("Something went wrong");
     } finally {
       setLoading(false);
     }
