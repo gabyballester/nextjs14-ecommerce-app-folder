@@ -14,6 +14,8 @@ import {
 
 import { capitalize } from "@/lib";
 
+//todo: REUTILIZAR O BORRAR
+
 export function ThemeToggle() {
   const { themes, setTheme } = useTheme();
 

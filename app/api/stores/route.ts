@@ -1,8 +1,8 @@
 import { NextResponse } from "next/server";
 import { auth } from "@clerk/nextjs/server";
-import { Store } from "@prisma/client";
-
 import { prismadb } from "@/prisma/prisma.client";
+
+import type { Store } from "@prisma/client";
 
 /**
  * Handles GET requests to fetch all stores.

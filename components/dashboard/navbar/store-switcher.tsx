@@ -2,7 +2,6 @@
 
 import { useState } from "react";
 import { useParams, useRouter } from "next/navigation";
-import { Store } from "@prisma/client";
 import {
   Check,
   ChevronsUpDown,
@@ -24,6 +23,8 @@ import {
   PopoverTrigger,
 } from "@/components/ui";
 import { cn } from "@/lib";
+
+import type { Store } from "@prisma/client";
 
 type PopoverTriggerProps = React.ComponentPropsWithoutRef<
   typeof PopoverTrigger
@@ -64,7 +65,6 @@ export const StoreSwitcher = ({ className, items }: Props) => {
       <PopoverTrigger asChild>
         <Button
           variant="outline"
-          size="sm"
           role="combobox"
           aria-expanded={open}
           aria-label="Select a store"

@@ -25,19 +25,21 @@ const formSchema = z.object({
   name: z.string().min(1),
 });
 
+type SettingFormValues = z.infer<typeof formSchema>;
+
 export const StoreModal = () => {
   const params = useParams();
   const { isOpen, onClose } = useStoreModal();
   const [loading, setLoading] = useState<boolean>(false);
 
-  const form = useForm<z.infer<typeof formSchema>>({
+  const form = useForm<SettingFormValues>({
     resolver: zodResolver(formSchema),
     defaultValues: {
       name: "",
     },
   });
 
-  const onSubmit = async (values: z.infer<typeof formSchema>) => {
+  const onSubmit = async (values: SettingFormValues) => {
     try {
       setLoading(false);
 

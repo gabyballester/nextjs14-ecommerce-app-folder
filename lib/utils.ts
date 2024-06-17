@@ -1,4 +1,5 @@
 import { type ClassValue, clsx } from "clsx";
+import { NextResponse } from "next/server";
 import { twMerge } from "tailwind-merge";
 
 export function cn(...inputs: ClassValue[]) {
@@ -8,3 +9,13 @@ export function cn(...inputs: ClassValue[]) {
 export function capitalize(str: string) {
   return str.charAt(0).toUpperCase() + str.slice(1);
 }
+
+export const handleError = (error: unknown) => {
+  let errorMessage = "Internal error";
+  if (error instanceof Error) {
+    errorMessage = error.message;
+  }
+  return new NextResponse(`Internal error: ${errorMessage}`, {
+    status: 500,
+  });
+};
