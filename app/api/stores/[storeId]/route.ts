@@ -2,9 +2,9 @@ import { NextResponse } from "next/server";
 import { auth } from "@clerk/nextjs/server";
 import { prismadb } from "@/prisma/prisma.client";
 import { z } from "zod";
+import { handleError } from "@/lib";
 
 import type { Store } from "@prisma/client";
-import { handleError } from "@/lib";
 
 const StoreUpdateSchema = z.object({
   name: z.string().min(1, "Name is required"),
@@ -14,8 +14,6 @@ export async function PATCH(
   req: Request,
   { params }: { params: { storeId: string } },
 ) {
-  console.log("__________________encontrado___________________");
-
   try {
     const { userId } = auth();
     if (!userId) return new NextResponse("Unauthorized", { status: 401 });

@@ -6,9 +6,11 @@ import { useForm } from "react-hook-form";
 import * as z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Trash } from "lucide-react";
+import { toast } from "react-hot-toast";
+import axios from "axios";
 
+import { useOrigin } from "@/hooks";
 import type { Store } from "@prisma/client";
-
 import {
   Button,
   Form,
@@ -20,9 +22,9 @@ import {
   Heading,
   Input,
   Separator,
-} from "@/components/ui";
-import { toast } from "react-hot-toast";
-import axios from "axios";
+  AlertModal,
+  ApiAlert,
+} from "@/components/index";
 
 type SettingsFormProps = {
   initialData: Store;
@@ -39,8 +41,7 @@ const SettingsForm: FC<SettingsFormProps> = ({ initialData }) => {
   const router = useRouter();
   const [open, setOpen] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(false);
-
-  console.log(open);
+  const origin = useOrigin();
 
   const form = useForm<SettingFormValues>({
     resolver: zodResolver(formSchema),
@@ -65,17 +66,38 @@ const SettingsForm: FC<SettingsFormProps> = ({ initialData }) => {
     }
   };
 
+  const handleDelete = async () => {
+    try {
+      setLoading(true);
+      const response = await axios.delete(`/api/stores/${params?.storeId}`);
+      if (response.statusText !== "OK") throw new Error();
+
+      router.refresh();
+      toast.success("Store deleted");
+    } catch (error) {
+      toast.error("Remove all products and categories first");
+    } finally {
+      setLoading(false);
+      setOpen(false);
+    }
+  };
+
   return (
     <>
+      <AlertModal
+        isOpen={open}
+        onClose={() => setOpen(false)}
+        onConfirm={handleDelete}
+        loading={loading}
+      />
+
       <div className="flex items-center justify-between">
         <Heading title="Settings" description="Manage store preferences" />
         <Button
           disabled={loading}
           variant="destructive"
           size="icon"
-          onClick={() => {
-            setOpen(true);
-          }}
+          onClick={() => setOpen(true)}
         >
           <Trash className="h-4 w-4" />
         </Button>
@@ -105,11 +127,21 @@ const SettingsForm: FC<SettingsFormProps> = ({ initialData }) => {
               )}
             />
           </div>
-          <Button disabled={loading} type="submit" className="ml-auto">
+          <Button
+            disabled={loading}
+            type="submit"
+            className="w-full sm:ml-auto sm:w-auto"
+          >
             Save changes
           </Button>
         </form>
       </Form>
+      <Separator />
+      <ApiAlert
+        title="NEXT_PUBLIC_API_URL"
+        description={`${origin}/api/${params?.storeId}`}
+        variant="public"
+      />
     </>
   );
 };
