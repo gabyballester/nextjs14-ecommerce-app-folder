@@ -19,7 +19,7 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "@/components/ui";
+} from "@/components/index";
 
 const formSchema = z.object({
   name: z.string().min(1),

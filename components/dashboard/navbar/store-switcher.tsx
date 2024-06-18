@@ -21,7 +21,7 @@ import {
   Popover,
   PopoverContent,
   PopoverTrigger,
-} from "@/components/ui";
+} from "@/components/index";
 import { cn } from "@/lib";
 
 import type { Store } from "@prisma/client";

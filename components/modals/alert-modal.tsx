@@ -1,7 +1,7 @@
 "use client";
 
 import { FC, useEffect, useState } from "react";
-import { Button, Modal } from "@/components/ui";
+import { Button, Modal } from "@/components/index";
 
 interface Props {
   isOpen: boolean;

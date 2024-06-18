@@ -10,7 +10,7 @@ import {
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
-} from "@/components";
+} from "@/components/index";
 
 import { capitalize } from "@/lib";
 

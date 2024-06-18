@@ -6,9 +6,11 @@ import { useForm } from "react-hook-form";
 import * as z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Trash } from "lucide-react";
+import { toast } from "react-hot-toast";
+import axios from "axios";
 
+import { useOrigin } from "@/hooks";
 import type { Store } from "@prisma/client";
-
 import {
   Button,
   Form,
@@ -20,10 +22,9 @@ import {
   Heading,
   Input,
   Separator,
-} from "@/components/ui";
-import { toast } from "react-hot-toast";
-import axios from "axios";
-import { AlertModal } from "@/components/modals";
+  AlertModal,
+  ApiAlert,
+} from "@/components/index";
 
 type SettingsFormProps = {
   initialData: Store;
@@ -40,6 +41,7 @@ const SettingsForm: FC<SettingsFormProps> = ({ initialData }) => {
   const router = useRouter();
   const [open, setOpen] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(false);
+  const origin = useOrigin();
 
   const form = useForm<SettingFormValues>({
     resolver: zodResolver(formSchema),
@@ -56,8 +58,6 @@ const SettingsForm: FC<SettingsFormProps> = ({ initialData }) => {
       if (response.statusText !== "OK") throw new Error();
 
       router.refresh();
-      // TODO: NO ES NECESARIO REDIRIGIR A /
-      // router.push("/")
       toast.success("Store updated");
     } catch (error) {
       toast.error("Something went wrong");
@@ -127,11 +127,21 @@ const SettingsForm: FC<SettingsFormProps> = ({ initialData }) => {
               )}
             />
           </div>
-          <Button disabled={loading} type="submit" className="ml-auto">
+          <Button
+            disabled={loading}
+            type="submit"
+            className="w-full sm:ml-auto sm:w-auto"
+          >
             Save changes
           </Button>
         </form>
       </Form>
+      <Separator />
+      <ApiAlert
+        title="NEXT_PUBLIC_API_URL"
+        description={`${origin}/api/${params?.storeId}`}
+        variant="public"
+      />
     </>
   );
 };
