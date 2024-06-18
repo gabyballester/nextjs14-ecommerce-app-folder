@@ -8,7 +8,7 @@ import {
   PlusCircle,
   Store as StoreIcon,
 } from "lucide-react";
-import { useStoreModal } from "@/hooks/use-store-modal";
+import { useStoreModal } from "@/hooks";
 import {
   Button,
   Command,
@@ -80,11 +80,7 @@ export const StoreSwitcher = ({ className, items }: Props) => {
           <CommandList>
             <CommandInput placeholder="Search store..." />
             <CommandEmpty>No stores found!</CommandEmpty>
-            <CommandGroup>
-              <CommandItem className="w-full justify-center">
-                <p>Stores</p>
-              </CommandItem>
-
+            <CommandGroup heading="Store selector..">
               {formattedItems.map((store) => (
                 <CommandItem
                   onSelect={() => onStoreSelect(store)}

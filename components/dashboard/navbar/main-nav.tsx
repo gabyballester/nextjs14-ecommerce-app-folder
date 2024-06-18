@@ -1,29 +1,35 @@
 "use client";
 
 import { HTMLAttributes } from "react";
-import { useParams } from "next/navigation";
+import { useParams, usePathname } from "next/navigation";
 import { cn } from "@/lib";
 import { NavLink } from "./nav-link";
 
 export type DashboardRoute = {
   href: string;
   label: string;
-  active: string;
+  active: boolean;
 };
 
 export const MainNav = ({
   className,
   ...props
 }: HTMLAttributes<HTMLElement>) => {
-  // const pathname = usePathname();
+  const pathname = usePathname();
   const params = useParams();
+  // TODO: Eliminar si no se usa
   // if (!params?.storeId) redirect("/");
 
-  const routes: DashboardRoute[] = [
+  const routes = [
+    {
+      href: `/${params?.storeId}`,
+      label: "Overview",
+      active: pathname === `/${params?.storeId}`,
+    },
     {
       href: `/${params?.storeId}/settings`,
       label: "Settings",
-      active: `/${params?.storeId}/settings`,
+      active: pathname === `/${params?.storeId}/settings`,
     },
   ];
 

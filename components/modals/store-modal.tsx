@@ -1,13 +1,13 @@
 "use client";
 
 import { useState } from "react";
-import { useParams } from "next/navigation";
+// import { useParams } from "next/navigation";
 import axios from "axios";
 import * as z from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import toast from "react-hot-toast";
-import { useStoreModal } from "@/hooks/use-store-modal";
+import { useStoreModal } from "@/hooks";
 
 import {
   Input,
@@ -28,7 +28,7 @@ const formSchema = z.object({
 type SettingFormValues = z.infer<typeof formSchema>;
 
 export const StoreModal = () => {
-  const params = useParams();
+  // const params = useParams();
   const { isOpen, onClose } = useStoreModal();
   const [loading, setLoading] = useState<boolean>(false);
 
@@ -47,10 +47,11 @@ export const StoreModal = () => {
       if (response.statusText !== "OK") throw new Error();
 
       toast.success("Store created.");
-      //redirecciona a la actual
-      window.location.assign(`/${params?.storeId}`);
-      //redirecciona a la creada
-      // window.location.assign(`/${response.data.id}`);
+      //incorrecto - redirecciona a la actual (si no existe no puede redirigir)
+      // window.location.assign(`/${params?.storeId}`);
+
+      //correcto - redirecciona a la creada
+      window.location.assign(`/${response.data.id}`);
       onClose();
     } catch (error) {
       toast.error("Something went wrong");
@@ -64,7 +65,7 @@ export const StoreModal = () => {
       title="Create Store"
       description="Add a new store to manage products and categories"
       isOpen={isOpen}
-      onClose={() => onClose}
+      onClose={onClose}
     >
       <div>
         <div className="space-y-4 py-2 pb-4">

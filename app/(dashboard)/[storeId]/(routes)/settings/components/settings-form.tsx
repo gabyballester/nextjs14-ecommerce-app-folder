@@ -23,6 +23,7 @@ import {
 } from "@/components/ui";
 import { toast } from "react-hot-toast";
 import axios from "axios";
+import { AlertModal } from "@/components/modals";
 
 type SettingsFormProps = {
   initialData: Store;
@@ -40,8 +41,6 @@ const SettingsForm: FC<SettingsFormProps> = ({ initialData }) => {
   const [open, setOpen] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(false);
 
-  console.log(open);
-
   const form = useForm<SettingFormValues>({
     resolver: zodResolver(formSchema),
     defaultValues: initialData,
@@ -57,6 +56,8 @@ const SettingsForm: FC<SettingsFormProps> = ({ initialData }) => {
       if (response.statusText !== "OK") throw new Error();
 
       router.refresh();
+      // TODO: NO ES NECESARIO REDIRIGIR A /
+      // router.push("/")
       toast.success("Store updated");
     } catch (error) {
       toast.error("Something went wrong");
@@ -65,17 +66,38 @@ const SettingsForm: FC<SettingsFormProps> = ({ initialData }) => {
     }
   };
 
+  const handleDelete = async () => {
+    try {
+      setLoading(true);
+      const response = await axios.delete(`/api/stores/${params?.storeId}`);
+      if (response.statusText !== "OK") throw new Error();
+
+      router.refresh();
+      toast.success("Store deleted");
+    } catch (error) {
+      toast.error("Remove all products and categories first");
+    } finally {
+      setLoading(false);
+      setOpen(false);
+    }
+  };
+
   return (
     <>
+      <AlertModal
+        isOpen={open}
+        onClose={() => setOpen(false)}
+        onConfirm={handleDelete}
+        loading={loading}
+      />
+
       <div className="flex items-center justify-between">
         <Heading title="Settings" description="Manage store preferences" />
         <Button
           disabled={loading}
           variant="destructive"
           size="icon"
-          onClick={() => {
-            setOpen(true);
-          }}
+          onClick={() => setOpen(true)}
         >
           <Trash className="h-4 w-4" />
         </Button>
