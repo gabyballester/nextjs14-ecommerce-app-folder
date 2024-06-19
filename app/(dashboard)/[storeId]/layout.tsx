@@ -2,7 +2,7 @@ import { ReactNode } from "react";
 import { redirect } from "next/navigation";
 import { auth } from "@clerk/nextjs/server";
 
-import { findStoreByStoreOrUserId } from "@/services/store";
+import { getStoreByStoreIdAndOrUserId } from "@/services";
 import { Navbar } from "@/components/dashboard";
 
 export default async function DashboardLayout({
@@ -15,7 +15,10 @@ export default async function DashboardLayout({
   const { userId } = auth();
   if (!userId) redirect("/sign-in");
 
-  const store = findStoreByStoreOrUserId({ storeId: params.storeId, userId });
+  const store = getStoreByStoreIdAndOrUserId({
+    storeId: params.storeId,
+    userId,
+  });
 
   if (!store) redirect("/");
 

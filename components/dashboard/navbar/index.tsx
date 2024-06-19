@@ -4,7 +4,7 @@ import { UserButton } from "@clerk/nextjs";
 
 import { StoreSwitcher } from "./store-switcher";
 import { MainNav } from "./main-nav";
-import { getStoresByUserId } from "@/services/store";
+import { getStoresByUserId } from "@/services";
 
 export const Navbar = async () => {
   const { userId } = auth();

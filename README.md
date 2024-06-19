@@ -42,6 +42,10 @@ The platform ensures high code quality and follows best practices. It’s config
 
 This project uses Tailwind CSS, custom themes, Shadcn components, and react-hot-toast for notifications.
 
+### Lucide-react
+
+A comprehensive icons library for React applications.
+
 ### Tailwind CSS and Custom Themes
 
 Tailwind CSS allows for rapid UI development with utility-first CSS. Custom themes ensure the application has a unique and consistent look and feel.
@@ -53,6 +57,11 @@ Shadcn provides a set of customizable, high-quality React components, perfect fo
 ### React-Hot-Toast
 
 React-Hot-Toast is used to display user-friendly notifications and response messages. This library makes it easy to provide real-time feedback to users with elegant and customizable toast messages.
+
+### Cloudinary as File Storage
+
+Utilized for storing and managing images within the app.
+`https://next.cloudinary.dev`
 
 ## Authentication
 

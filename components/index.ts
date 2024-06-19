@@ -3,3 +3,4 @@ export * from "./modals";
 export * from "./theme-toggle";
 export * from "./ui";
 export * from "./api-alert";
+export * from "./image-upload";

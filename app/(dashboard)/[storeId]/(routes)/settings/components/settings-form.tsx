@@ -2,12 +2,12 @@
 
 import { FC, useState } from "react";
 import { useParams, useRouter } from "next/navigation";
+import axios from "axios";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Trash } from "lucide-react";
 import { toast } from "react-hot-toast";
-import axios from "axios";
 
 import { useOrigin } from "@/hooks";
 import type { Store } from "@prisma/client";
@@ -25,6 +25,7 @@ import {
   AlertModal,
   ApiAlert,
 } from "@/components/index";
+import { capitalize } from "@/lib";
 
 type SettingsFormProps = {
   initialData: Store;
@@ -39,9 +40,10 @@ type SettingFormValues = z.infer<typeof formSchema>;
 const SettingsForm: FC<SettingsFormProps> = ({ initialData }) => {
   const params = useParams();
   const router = useRouter();
+  const origin = useOrigin();
+
   const [open, setOpen] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(false);
-  const origin = useOrigin();
 
   const form = useForm<SettingFormValues>({
     resolver: zodResolver(formSchema),
@@ -73,6 +75,7 @@ const SettingsForm: FC<SettingsFormProps> = ({ initialData }) => {
       if (response.statusText !== "OK") throw new Error();
 
       router.refresh();
+      router.push("/"); //todo: ¿hace falta?
       toast.success("Store deleted");
     } catch (error) {
       toast.error("Remove all products and categories first");
@@ -114,7 +117,7 @@ const SettingsForm: FC<SettingsFormProps> = ({ initialData }) => {
               name="name"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Name</FormLabel>
+                  <FormLabel>{capitalize(field.name)}</FormLabel>
                   <FormControl>
                     <Input
                       disabled={loading}
