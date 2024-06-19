@@ -10,9 +10,8 @@ export function capitalize(str: string) {
   return str.charAt(0).toUpperCase() + str.slice(1);
 }
 
-type Primitive = string | number | boolean | null | undefined | symbol | bigint;
-
-export const handleError = <T extends Record<string, Primitive>>(
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export const handleError = <T extends Record<string, any>>(
   error: unknown,
 ): NextResponse<T> => {
   let errorMessage = "Internal error";

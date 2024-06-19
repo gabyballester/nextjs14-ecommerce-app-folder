@@ -1,13 +1,13 @@
-import { prismadb } from "@/prisma/prisma.client";
 import BillBoardForm from "./components/billboard-form";
+import { findBillboardById } from "@/services";
 
 const BilboardPage = async ({
   params,
 }: {
   params: { billboardId: string };
 }) => {
-  const billboard = await prismadb.billboard.findUnique({
-    where: { id: params.billboardId },
+  const billboard = await findBillboardById({
+    billBoardId: params.billboardId,
   });
 
   return (

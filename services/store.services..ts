@@ -24,3 +24,58 @@ export async function getStoreByStoreIdAndOrUserId({
 export async function getStoresByUserId(userId: string) {
   return await prismadb.store.findMany({ where: { userId } });
 }
+
+export async function getStores() {
+  return await prismadb.store.findMany();
+}
+
+export async function createStore({
+  name,
+  userId,
+}: {
+  name: string;
+  userId: string;
+}) {
+  return await prismadb.store.create({
+    data: { name, userId },
+  });
+}
+
+export async function findStoreByStoreIdUserId({
+  storeId,
+  userId,
+}: {
+  storeId: string;
+  userId: string;
+}) {
+  return prismadb.store.findUnique({
+    where: { id: storeId, userId },
+  });
+}
+
+export async function updateStore({
+  storeId,
+  userId,
+  data,
+}: {
+  storeId: string;
+  userId: string;
+  data: Partial<Store>;
+}) {
+  return await prismadb.store.update({
+    where: { id: storeId, userId },
+    data,
+  });
+}
+
+export async function deleteStore({
+  storeId,
+  userId,
+}: {
+  storeId: string;
+  userId: string;
+}) {
+  return prismadb.store.delete({
+    where: { id: storeId, userId },
+  });
+}

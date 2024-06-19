@@ -1,9 +1,9 @@
 import { NextResponse } from "next/server";
 import { auth } from "@clerk/nextjs/server";
-import { prismadb } from "@/prisma/prisma.client";
 import { z } from "zod";
 import type { Store } from "@prisma/client";
 import { handleError } from "@/lib";
+import { createStore, getStores } from "@/services";
 
 /**
  * Handles GET requests to fetch all stores.
@@ -11,7 +11,7 @@ import { handleError } from "@/lib";
  */
 export async function GET(): Promise<NextResponse<Store[]>> {
   try {
-    const stores = await prismadb.store.findMany();
+    const stores = await getStores();
 
     if (!stores || stores.length === 0) {
       return new NextResponse("No stores found", { status: 404 });
@@ -48,8 +48,9 @@ export async function POST(req: Request): Promise<NextResponse<Store>> {
       );
     }
 
-    const store = await prismadb.store.create({
-      data: { name, userId },
+    const store = await createStore({
+      name,
+      userId,
     });
 
     return NextResponse.json(store);

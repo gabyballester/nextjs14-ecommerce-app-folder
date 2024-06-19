@@ -1,9 +1,9 @@
 import { NextResponse } from "next/server";
 import { auth } from "@clerk/nextjs/server";
-import { prismadb } from "@/prisma/prisma.client";
 import { z } from "zod";
 import { handleError } from "@/lib";
 import type { Store } from "@prisma/client";
+import { deleteStore, findStoreByStoreIdUserId, updateStore } from "@/services";
 
 const StoreUpdateSchema = z.object({
   name: z.string().min(1, "Name is required"),
@@ -36,8 +36,9 @@ export async function PATCH(
       return new NextResponse("Store id is required", { status: 400 });
     }
 
-    const existingStore = await prismadb.store.findUnique({
-      where: { id: params.storeId, userId },
+    const existingStore = await findStoreByStoreIdUserId({
+      storeId: params.storeId,
+      userId,
     });
 
     if (!existingStore) {
@@ -47,9 +48,12 @@ export async function PATCH(
       );
     }
 
-    const store: Store = await prismadb.store.update({
-      where: { id: params.storeId, userId },
-      data: { name },
+    const storeToUpdate: Partial<Store> = { name };
+
+    const store: Store = await updateStore({
+      storeId: params.storeId,
+      userId,
+      data: storeToUpdate,
     });
 
     if (!store) {
@@ -79,8 +83,9 @@ export async function DELETE(
       return new NextResponse("Store id is required", { status: 400 });
     }
 
-    const existingStore = await prismadb.store.findUnique({
-      where: { id: params.storeId, userId },
+    const existingStore = await findStoreByStoreIdUserId({
+      storeId: params.storeId,
+      userId,
     });
 
     if (!existingStore) {
@@ -90,8 +95,9 @@ export async function DELETE(
       );
     }
 
-    const store: Store = await prismadb.store.delete({
-      where: { id: params.storeId, userId },
+    const store: Store = await deleteStore({
+      storeId: params.storeId,
+      userId,
     });
 
     if (!store) {

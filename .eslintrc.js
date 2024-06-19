@@ -31,7 +31,6 @@ module.exports = {
     // JavaScript rules
     'prefer-const': 'warn',
     'no-var': 'warn',
-    'no-unused-vars': 'warn',
     // "indent": ["warn", 2],
     'object-shorthand': 'warn',
     'quote-props': ['warn', 'as-needed'],

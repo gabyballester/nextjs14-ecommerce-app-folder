@@ -4,21 +4,19 @@ import { FC, useEffect, useState } from "react";
 import { Button } from "@/components/index";
 import { ImagePlus, Trash } from "lucide-react";
 import Image from "next/image";
-import { CldUploadWidget } from "next-cloudinary";
+import {
+  CldUploadWidget,
+  CldUploadWidgetProps,
+  CloudinaryUploadWidgetResults,
+} from "next-cloudinary";
 
 interface Props {
   disabled?: boolean;
-  onChange: (url: string) => void;
-  onRemove: (url: string) => void;
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  onChange: (_event: string) => void;
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  onRemove: (_event: string) => void;
   value: string[];
-}
-
-interface CloudinaryUploadWidgetInfo {
-  secure_url: string;
-}
-
-interface CloudinaryUploadWidgetResults {
-  info: CloudinaryUploadWidgetInfo;
 }
 
 export const ImageUpload: FC<Props> = ({
@@ -33,14 +31,21 @@ export const ImageUpload: FC<Props> = ({
     setIsMounted(true);
   }, []);
 
-  const handleUpdateImage = (results: CloudinaryUploadWidgetResults) => {
-    if (results.info?.secure_url) {
-      onChange(results.info.secure_url);
-    } else {
-      // Considerar manejar este error de manera diferente
-      console.error("Unexpected result format:", results);
+  const handleSuccess: CldUploadWidgetProps["onSuccess"] = async (
+    results: CloudinaryUploadWidgetResults,
+  ) => {
+    try {
+      const info = results.info;
+      if (info && typeof info !== "string" && info.secure_url) {
+        onChange(info.secure_url);
+      } else {
+        console.error("Unexpected result format:", results);
+      }
+    } catch (error) {
+      console.error("Error processing upload results:", error);
     }
   };
+
   if (!isMounted) {
     return null;
   }
@@ -67,10 +72,7 @@ export const ImageUpload: FC<Props> = ({
           </div>
         ))}
       </div>
-      <CldUploadWidget
-        onSuccess={() => handleUpdateImage}
-        uploadPreset="ugkwntqs"
-      >
+      <CldUploadWidget onSuccess={handleSuccess} uploadPreset="ugkwntqs">
         {({ open }) => (
           <Button
             type="button"
