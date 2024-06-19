@@ -2,7 +2,7 @@ import { FC } from "react";
 import { redirect } from "next/navigation";
 import { auth } from "@clerk/nextjs/server";
 import { getStoreByStoreIdAndOrUserId } from "@/services";
-import SettingsForm from "./components/settings-form";
+import { BillboardClient } from "./components/billboard-client";
 
 interface Props {
   params: { storeId: string };
@@ -22,7 +22,7 @@ const SettingsPage: FC<Props> = async ({ params }) => {
   return (
     <div className="flex-col">
       <div className="flex-1 space-y-2 p-6 pt-5">
-        <SettingsForm initialData={store} />
+        <BillboardClient />
       </div>
     </div>
   );

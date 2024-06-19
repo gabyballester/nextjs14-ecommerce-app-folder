@@ -10,7 +10,11 @@ export function capitalize(str: string) {
   return str.charAt(0).toUpperCase() + str.slice(1);
 }
 
-export const handleError = (error: unknown) => {
+type Primitive = string | number | boolean | null | undefined | symbol | bigint;
+
+export const handleError = <T extends Record<string, Primitive>>(
+  error: unknown,
+): NextResponse<T> => {
   let errorMessage = "Internal error";
   if (error instanceof Error) {
     errorMessage = error.message;

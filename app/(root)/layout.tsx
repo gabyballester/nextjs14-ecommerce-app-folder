@@ -1,7 +1,7 @@
 import { ReactNode } from "react";
 import { redirect } from "next/navigation";
 import { auth } from "@clerk/nextjs/server";
-import { findStoreByStoreOrUserId } from "@/services/store";
+import { getStoreByStoreIdAndOrUserId } from "@/services";
 
 export default async function SetupLayout({
   children,
@@ -12,7 +12,7 @@ export default async function SetupLayout({
 
   if (!userId) redirect("/sign-in");
 
-  const store = await findStoreByStoreOrUserId({ userId });
+  const store = await getStoreByStoreIdAndOrUserId({ userId });
 
   if (store) redirect(`/${store.id}`);
 

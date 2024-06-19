@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-// import { useParams } from "next/navigation";
 import axios from "axios";
 import * as z from "zod";
 import { useForm } from "react-hook-form";
@@ -28,7 +27,6 @@ const formSchema = z.object({
 type SettingFormValues = z.infer<typeof formSchema>;
 
 export const StoreModal = () => {
-  // const params = useParams();
   const { isOpen, onClose } = useStoreModal();
   const [loading, setLoading] = useState<boolean>(false);
 

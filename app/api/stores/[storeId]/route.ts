@@ -3,37 +3,39 @@ import { auth } from "@clerk/nextjs/server";
 import { prismadb } from "@/prisma/prisma.client";
 import { z } from "zod";
 import { handleError } from "@/lib";
-
 import type { Store } from "@prisma/client";
 
 const StoreUpdateSchema = z.object({
   name: z.string().min(1, "Name is required"),
 });
 
+/**
+ * Handles patch requests to update store by storeId.
+ * @example curl -X PATCH http://localhost:3000/api/stores/storeId
+ */
 export async function PATCH(
   req: Request,
   { params }: { params: { storeId: string } },
-) {
+): Promise<NextResponse<Store>> {
   try {
     const { userId } = auth();
-    if (!userId) return new NextResponse("Unauthorized", { status: 401 });
+    if (!userId) return new NextResponse("Unauthenticated", { status: 401 });
 
-    const json = await req.json();
-    const result = StoreUpdateSchema.safeParse(json);
-    if (!result.success) {
+    const { name }: Store = await req.json();
+    if (!name) return new NextResponse("Name is required", { status: 400 });
+
+    const zodValidation = StoreUpdateSchema.safeParse({ name });
+    if (!zodValidation.success) {
       return new NextResponse(
-        result.error.errors.map((e) => e.message).join(", "),
+        zodValidation.error.errors.map((e) => e.message).join(", "),
         { status: 400 },
       );
     }
-
-    const { name } = result.data;
 
     if (!params.storeId) {
       return new NextResponse("Store id is required", { status: 400 });
     }
 
-    // Check if the store exists and belongs to the user
     const existingStore = await prismadb.store.findUnique({
       where: { id: params.storeId, userId },
     });
@@ -56,17 +58,22 @@ export async function PATCH(
 
     return NextResponse.json(store);
   } catch (error) {
+    console.log("[STORES_PATCH]", error);
     return handleError(error);
   }
 }
 
+/**
+ * Handles delete requests to delete store by storeId.
+ * @example curl -X DELETE http://localhost:3000/api/stores/storeId
+ */
 export async function DELETE(
   _req: Request,
   { params }: { params: { storeId: string } },
-) {
+): Promise<NextResponse<Store>> {
   try {
     const { userId } = auth();
-    if (!userId) return new NextResponse("Unauthorized", { status: 401 });
+    if (!userId) return new NextResponse("Unauthenticated", { status: 401 });
 
     if (!params.storeId) {
       return new NextResponse("Store id is required", { status: 400 });
@@ -93,6 +100,7 @@ export async function DELETE(
 
     return NextResponse.json(store);
   } catch (error) {
+    console.log("[STORES_DELETE]", error);
     return handleError(error);
   }
 }
