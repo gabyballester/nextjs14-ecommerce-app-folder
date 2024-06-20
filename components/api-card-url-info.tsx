@@ -6,23 +6,26 @@ import { Copy, Server } from "lucide-react";
 import { Badge, BadgeProps } from "./ui/badge";
 import { toast } from "react-hot-toast";
 
-interface Props {
+export interface ApiCardUrlInfoProps {
   title: string;
   description: string;
   variant: "public" | "admin";
 }
 
-const textMap: Record<Props["variant"], string> = {
+const textMap: Record<ApiCardUrlInfoProps["variant"], string> = {
   public: "Public",
   admin: "Admin",
 };
 
-const variantMap: Record<Props["variant"], BadgeProps["variant"]> = {
+const variantMap: Record<
+  ApiCardUrlInfoProps["variant"],
+  BadgeProps["variant"]
+> = {
   public: "secondary",
   admin: "destructive",
 };
 
-export const ApiAlert: FC<Props> = ({
+export const ApiCardUrlInfo: FC<ApiCardUrlInfoProps> = ({
   title,
   description,
   variant = "public",

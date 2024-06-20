@@ -23,7 +23,7 @@ import {
   Input,
   Separator,
   ConfirmModal,
-  ApiAlert,
+  ApiCardUrlInfo,
 } from "@/components/index";
 import { capitalize } from "@/lib";
 
@@ -59,6 +59,7 @@ const SettingsForm: FC<SettingsFormProps> = ({ initialData }) => {
       );
       if (response.statusText !== "OK") throw new Error();
 
+      router.push(`/${params?.storeId}`);
       router.refresh();
       toast.success("Store updated");
     } catch (error) {
@@ -140,7 +141,7 @@ const SettingsForm: FC<SettingsFormProps> = ({ initialData }) => {
         </form>
       </Form>
       <Separator />
-      <ApiAlert
+      <ApiCardUrlInfo
         title="NEXT_PUBLIC_API_URL"
         description={`${origin}/api/${params?.storeId}`}
         variant="public"

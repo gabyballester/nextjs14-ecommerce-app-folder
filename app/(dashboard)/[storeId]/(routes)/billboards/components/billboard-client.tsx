@@ -4,7 +4,7 @@ import { FC } from "react";
 import { Plus } from "lucide-react";
 import { useParams, useRouter } from "next/navigation";
 
-import { Button, Heading, Separator } from "@/components/index";
+import { ApiUrlList, Button, Heading, Separator } from "@/components/index";
 import { BillboardColumn, DataTable, columns } from "./table";
 
 interface Props {
@@ -38,6 +38,9 @@ export const BillboardClient: FC<Props> = ({ data }) => {
         columns={columns}
         data={data}
       />
+      <Heading title={"API"} description={"API calls for Billboards"}></Heading>
+      <Separator />
+      <ApiUrlList entityName={"billboards"} entityIdName={"billboardId"} />
     </>
   );
 };
