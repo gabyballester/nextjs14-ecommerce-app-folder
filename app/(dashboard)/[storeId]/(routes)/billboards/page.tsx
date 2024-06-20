@@ -1,13 +1,16 @@
 import { findBillboardsByStoreId } from "@/services";
-import { BillboardClient } from "./components/billboard-client";
 import { mapBillboardToColumn } from "@/mappers";
+import { BillboardClient } from "./components/billboard-client";
+import { BillboardColumn } from "./components/table";
 
 const BillboardsPage = async ({ params }: { params: { storeId: string } }) => {
   const billboards = await findBillboardsByStoreId({
     storeId: params.storeId,
+    order: "desc",
   });
 
-  const formattedBillboards = billboards.map(mapBillboardToColumn);
+  const formattedBillboards: BillboardColumn[] =
+    billboards.map(mapBillboardToColumn);
 
   return (
     <div className="flex-col">

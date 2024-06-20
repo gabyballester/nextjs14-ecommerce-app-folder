@@ -112,7 +112,7 @@ const SettingsForm: FC<SettingsFormProps> = ({ initialData }) => {
           onSubmit={form.handleSubmit(handleUpdate)}
           className="w-full space-y-4"
         >
-          <div className="grid-col-3 grid gap-8">
+          <div className="grid grid-cols-3 gap-8">
             <FormField
               control={form.control}
               name="name"

@@ -25,7 +25,7 @@ export async function GET(
     }
 
     const billboard = await findBillboardById({
-      billBoardId: params.billboardId,
+      billboardId: params.billboardId,
     });
 
     if (!billboard) {
@@ -71,7 +71,7 @@ export async function PATCH(
     }
 
     if (!imageUrl) {
-      return new NextResponse("Label is required", { status: 400 });
+      return new NextResponse("Image url is required", { status: 400 });
     }
 
     const result = BillboardUpdateSchema.safeParse({ label, imageUrl });

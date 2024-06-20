@@ -2,16 +2,16 @@ import { prismadb } from "@/prisma/prisma.client";
 import { Billboard } from "@prisma/client";
 
 export async function findBillboardById({
-  billBoardId,
+  billboardId,
 }: {
-  billBoardId: string;
+  billboardId: string;
 }): Promise<Billboard | null> {
-  if (!billBoardId) {
+  if (!billboardId) {
     throw new Error("Billboard id must be provided");
   }
 
   return await prismadb.billboard.findUnique({
-    where: { id: billBoardId },
+    where: { id: billboardId },
   });
 }
 
@@ -21,8 +21,10 @@ export async function findManyBillboards(): Promise<Billboard[]> {
 
 export async function findBillboardsByStoreId({
   storeId,
+  order,
 }: {
   storeId: string;
+  order: "asc" | "desc";
 }): Promise<Billboard[]> {
   if (!storeId) {
     throw new Error("Store id must be provided");
@@ -31,7 +33,7 @@ export async function findBillboardsByStoreId({
   return await prismadb.billboard.findMany({
     where: { storeId },
     orderBy: {
-      createdAt: "desc",
+      createdAt: order,
     },
   });
 }
