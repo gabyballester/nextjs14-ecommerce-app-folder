@@ -1,33 +1,33 @@
 import { NextResponse } from "next/server";
 import { auth } from "@clerk/nextjs/server";
 
-import type { Billboard } from "@prisma/client";
+import type { Category } from "@prisma/client";
 import {
-  createBillboard,
-  findBillboardsByStoreId,
+  createCategory,
+  findCategoriesByStoreId,
   getStoreByStoreIdAndOrUserId,
 } from "@/services";
 import { handleError } from "@/lib";
 
 /**
  * Handles POST requests to create a new store.
- * @example curl -X POST http://localhost:3000/api/storeId/billboards
+ * @example curl -X POST http://localhost:3000/api/storeId/categories
  */
 export async function POST(
   req: Request,
   { params }: { params: { storeId: string } },
-): Promise<NextResponse<Billboard>> {
+): Promise<NextResponse<Category>> {
   try {
     const { userId } = auth();
 
     if (!userId) return new NextResponse("Unauthenticated", { status: 401 });
 
-    const { label, imageUrl }: Billboard = await req.json();
+    const { name, billboardId }: Category = await req.json();
 
-    if (!label) return new NextResponse("Label is required", { status: 400 });
+    if (!name) return new NextResponse("Name is required", { status: 400 });
 
-    if (!imageUrl)
-      return new NextResponse("Image url is required", { status: 400 });
+    if (!billboardId)
+      return new NextResponse("Billboard id is required", { status: 400 });
 
     if (!params?.storeId)
       return new NextResponse("Store id is required", { status: 400 });
@@ -40,35 +40,35 @@ export async function POST(
     if (!storeByUserId)
       return new NextResponse("Unauthorized", { status: 403 });
 
-    const billboard = await createBillboard({
+    const category = await createCategory({
       storeId: params.storeId,
-      data: { label, imageUrl },
+      data: { name, billboardId },
     });
 
-    return NextResponse.json(billboard);
+    return NextResponse.json(category);
   } catch (error) {
-    console.log("[BILLBOARDS_POST]", error);
+    console.log("[CATEGORIES_POST]", error);
     return handleError(error);
   }
 }
 
 /**
  * Handles POST requests to create a new store.
- * @example curl -X POST http://localhost:3000/api/storeId/billboards
+ * @example curl -X POST http://localhost:3000/api/storeId/categories
  */
 export async function GET(
   _req: Request,
   { params }: { params: { storeId: string } },
-): Promise<NextResponse<Billboard[]>> {
+): Promise<NextResponse<Category[]>> {
   try {
-    const billboards = await findBillboardsByStoreId({
+    const categories = await findCategoriesByStoreId({
       storeId: params.storeId,
       order: "desc",
     });
 
-    return NextResponse.json(billboards);
+    return NextResponse.json(categories);
   } catch (error) {
-    console.log("[BILLBOARDS_GET]", error);
+    console.log("[CATEGORIES_GET]", error);
     return handleError(error);
   }
 }

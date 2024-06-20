@@ -54,6 +54,10 @@ Tailwind CSS allows for rapid UI development with utility-first CSS. Custom them
 
 Shadcn provides a set of customizable, high-quality React components, perfect for building responsive projects. It offers a range of components from basic buttons to complex navigation systems, all designed for customization and ease of use.
 
+#### Data-Table from Shadcn library
+
+The data-table component utilizes Tanstak Table, a highly customizable and performant table library. It is fully compatible with Tailwind CSS, allowing for easy styling and theming to match the rest of the application. This integration ensures the data-table is both flexible and powerful, capable of handling complex data display requirements with ease.
+
 ### React-Hot-Toast
 
 React-Hot-Toast is used to display user-friendly notifications and response messages. This library makes it easy to provide real-time feedback to users with elegant and customizable toast messages.
