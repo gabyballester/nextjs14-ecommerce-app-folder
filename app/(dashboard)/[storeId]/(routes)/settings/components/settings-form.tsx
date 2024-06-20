@@ -22,7 +22,7 @@ import {
   Heading,
   Input,
   Separator,
-  AlertModal,
+  ConfirmModal,
   ApiAlert,
 } from "@/components/index";
 import { capitalize } from "@/lib";
@@ -74,8 +74,8 @@ const SettingsForm: FC<SettingsFormProps> = ({ initialData }) => {
       const response = await axios.delete(`/api/stores/${params?.storeId}`);
       if (response.statusText !== "OK") throw new Error();
 
+      router.push("/"); //todo: ¿hace falta 2?
       router.refresh();
-      router.push("/"); //todo: ¿hace falta?
       toast.success("Store deleted");
     } catch (error) {
       toast.error("Remove all products and categories first");
@@ -87,7 +87,7 @@ const SettingsForm: FC<SettingsFormProps> = ({ initialData }) => {
 
   return (
     <>
-      <AlertModal
+      <ConfirmModal
         isOpen={open}
         onClose={() => setOpen(false)}
         onConfirm={handleDelete}

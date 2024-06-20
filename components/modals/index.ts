@@ -1,2 +1,2 @@
-export * from "./alert-modal";
+export * from "./confirm-modal";
 export * from "./store-modal";

@@ -21,7 +21,7 @@ import {
   Heading,
   Input,
   Separator,
-  AlertModal,
+  ConfirmModal,
   ImageUpload,
 } from "@/components/index";
 import { capitalize } from "@/lib";
@@ -40,6 +40,7 @@ type BillboardFormValues = z.infer<typeof formSchema>;
 const BillBoardForm: FC<BillbordFormProps> = ({ initialData }) => {
   const params = useParams();
   const router = useRouter();
+
   const [open, setOpen] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(false);
 
@@ -64,6 +65,7 @@ const BillBoardForm: FC<BillbordFormProps> = ({ initialData }) => {
 
   const onSubmit = async (data: BillboardFormValues) => {
     let response;
+
     try {
       setLoading(true);
       if (initialData) {
@@ -77,8 +79,8 @@ const BillBoardForm: FC<BillbordFormProps> = ({ initialData }) => {
 
       if (response.statusText !== "OK") throw new Error();
 
-      router.refresh();
       router.push(`/${params?.storeId}/billboards`);
+      router.refresh();
       toast.success(toastMessage);
     } catch (error) {
       toast.error("Something went wrong");
@@ -95,8 +97,8 @@ const BillBoardForm: FC<BillbordFormProps> = ({ initialData }) => {
       );
       if (response.statusText !== "OK") throw new Error();
 
+      router.push(`/${params.storeId}/billboards`);
       router.refresh();
-      router.push("/"); //todo: ¿hace falta?
       toast.success("Billboard deleted");
     } catch (error) {
       toast.error("Remove all categories using this billboard first.");
@@ -108,7 +110,7 @@ const BillBoardForm: FC<BillbordFormProps> = ({ initialData }) => {
 
   return (
     <>
-      <AlertModal
+      <ConfirmModal
         isOpen={open}
         onClose={() => setOpen(false)}
         onConfirm={handleDelete}
@@ -180,7 +182,6 @@ const BillBoardForm: FC<BillbordFormProps> = ({ initialData }) => {
           </Button>
         </form>
       </Form>
-      <Separator />
     </>
   );
 };

@@ -1,31 +1,21 @@
-import { FC } from "react";
-import { redirect } from "next/navigation";
-import { auth } from "@clerk/nextjs/server";
-import { getStoreByStoreIdAndOrUserId } from "@/services";
+import { findBillboardsByStoreId } from "@/services";
 import { BillboardClient } from "./components/billboard-client";
+import { mapBillboardToColumn } from "@/mappers";
 
-interface Props {
-  params: { storeId: string };
-}
-
-const SettingsPage: FC<Props> = async ({ params }) => {
-  const { userId } = auth();
-  if (!userId) redirect("/sign-in");
-
-  const store = await getStoreByStoreIdAndOrUserId({
+const BillboardsPage = async ({ params }: { params: { storeId: string } }) => {
+  const billboards = await findBillboardsByStoreId({
     storeId: params.storeId,
-    userId,
   });
 
-  if (!store) redirect("/");
+  const formattedBillboards = billboards.map(mapBillboardToColumn);
 
   return (
     <div className="flex-col">
       <div className="flex-1 space-y-2 p-6 pt-5">
-        <BillboardClient />
+        <BillboardClient data={formattedBillboards} />
       </div>
     </div>
   );
 };
 
-export default SettingsPage;
+export default BillboardsPage;
