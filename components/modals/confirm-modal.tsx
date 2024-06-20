@@ -10,7 +10,7 @@ interface Props {
   loading: boolean;
 }
 
-export const AlertModal: FC<Props> = ({
+export const ConfirmModal: FC<Props> = ({
   isOpen,
   onClose,
   onConfirm,

@@ -15,6 +15,10 @@ export async function findBillboardById({
   });
 }
 
+export async function findManyBillboards(): Promise<Billboard[]> {
+  return (await prismadb.billboard.findMany()) || [];
+}
+
 export async function findBillboardsByStoreId({
   storeId,
 }: {
@@ -26,6 +30,9 @@ export async function findBillboardsByStoreId({
 
   return await prismadb.billboard.findMany({
     where: { storeId },
+    orderBy: {
+      createdAt: "desc",
+    },
   });
 }
 

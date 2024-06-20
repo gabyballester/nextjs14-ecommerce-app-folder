@@ -22,8 +22,8 @@ import {
   Heading,
   Input,
   Separator,
-  AlertModal,
-  ApiAlert,
+  ConfirmModal,
+  ApiCardUrlInfo,
 } from "@/components/index";
 import { capitalize } from "@/lib";
 
@@ -59,6 +59,7 @@ const SettingsForm: FC<SettingsFormProps> = ({ initialData }) => {
       );
       if (response.statusText !== "OK") throw new Error();
 
+      router.push(`/${params?.storeId}`);
       router.refresh();
       toast.success("Store updated");
     } catch (error) {
@@ -74,8 +75,8 @@ const SettingsForm: FC<SettingsFormProps> = ({ initialData }) => {
       const response = await axios.delete(`/api/stores/${params?.storeId}`);
       if (response.statusText !== "OK") throw new Error();
 
+      router.push("/"); //todo: ¿hace falta 2?
       router.refresh();
-      router.push("/"); //todo: ¿hace falta?
       toast.success("Store deleted");
     } catch (error) {
       toast.error("Remove all products and categories first");
@@ -87,7 +88,7 @@ const SettingsForm: FC<SettingsFormProps> = ({ initialData }) => {
 
   return (
     <>
-      <AlertModal
+      <ConfirmModal
         isOpen={open}
         onClose={() => setOpen(false)}
         onConfirm={handleDelete}
@@ -140,7 +141,7 @@ const SettingsForm: FC<SettingsFormProps> = ({ initialData }) => {
         </form>
       </Form>
       <Separator />
-      <ApiAlert
+      <ApiCardUrlInfo
         title="NEXT_PUBLIC_API_URL"
         description={`${origin}/api/${params?.storeId}`}
         variant="public"
