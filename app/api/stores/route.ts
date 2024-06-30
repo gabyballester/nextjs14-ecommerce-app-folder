@@ -1,6 +1,5 @@
 import { NextResponse } from "next/server";
 import { auth } from "@clerk/nextjs/server";
-import { z } from "zod";
 import type { Store } from "@prisma/client";
 import { handleError } from "@/lib";
 import { createStore, getStores } from "@/services";
@@ -24,10 +23,6 @@ export async function GET(): Promise<NextResponse<Store[]>> {
   }
 }
 
-const StoreCreateSchema = z.object({
-  name: z.string().min(1, "Name is required"),
-});
-
 /**
  * Handles POST requests to create a new store.
  * @example curl -X POST http://localhost:3000/api/stores
@@ -39,14 +34,6 @@ export async function POST(req: Request): Promise<NextResponse<Store>> {
 
     const { name }: Store = await req.json();
     if (!name) return new NextResponse("Name is required", { status: 400 });
-
-    const zodValidation = StoreCreateSchema.safeParse({ name });
-    if (!zodValidation.success) {
-      return new NextResponse(
-        zodValidation.error.errors.map((e) => e.message).join(", "),
-        { status: 400 },
-      );
-    }
 
     const store = await createStore({
       name,

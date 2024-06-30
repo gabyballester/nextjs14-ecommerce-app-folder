@@ -26,18 +26,18 @@ import {
 } from "@/components/index";
 import { capitalize } from "@/lib";
 
-type BillbordFormProps = {
+type Pros = {
   initialData: Billboard | null;
 };
 
-const formSchema = z.object({
-  label: z.string().min(1),
-  imageUrl: z.string().min(1),
+const billboardFormSchema = z.object({
+  label: z.string().min(1, "Label is required"),
+  imageUrl: z.string().min(1, "Image is required"),
 });
 
-type BillboardFormValues = z.infer<typeof formSchema>;
+type FormValues = z.infer<typeof billboardFormSchema>;
 
-const BillBoardForm: FC<BillbordFormProps> = ({ initialData }) => {
+const BillboardForm: FC<Pros> = ({ initialData }) => {
   const params = useParams();
   const router = useRouter();
 
@@ -54,16 +54,16 @@ const BillBoardForm: FC<BillbordFormProps> = ({ initialData }) => {
   const title = initialData ? "Edit billboard" : "Create billboard";
   const description = initialData ? "Edit a billboard" : "Create a billboard";
   const toastMessage = initialData ? "Billboard updated" : "Billboard created";
-  const action = initialData ? "Save changes" : "Create";
+  const action = initialData ? "Update" : "Create";
 
-  const form = useForm<BillboardFormValues>({
-    resolver: zodResolver(formSchema),
+  const form = useForm<FormValues>({
+    resolver: zodResolver(billboardFormSchema),
     defaultValues: initialData ?? emptyBillboard,
   });
 
   if (!params || !params.storeId || !params.billboardId) return null;
 
-  const onSubmit = async (data: BillboardFormValues) => {
+  const onSubmit = async (data: FormValues) => {
     const updateUrl = `/api/${params?.storeId}/billboards/${params?.billboardId}`;
     const createUrl = `/api/${params?.storeId}/billboards`;
 
@@ -186,4 +186,4 @@ const BillBoardForm: FC<BillbordFormProps> = ({ initialData }) => {
   );
 };
 
-export default BillBoardForm;
+export default BillboardForm;

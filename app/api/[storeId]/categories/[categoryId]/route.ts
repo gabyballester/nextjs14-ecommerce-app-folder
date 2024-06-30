@@ -1,6 +1,5 @@
 import { NextResponse } from "next/server";
 import { auth } from "@clerk/nextjs/server";
-import { z } from "zod";
 import { handleError } from "@/lib";
 
 import type { Category } from "@prisma/client";
@@ -39,11 +38,6 @@ export async function GET(
   }
 }
 
-const CategoryUpdateSchema = z.object({
-  name: z.string().min(1, "Name is required"),
-  billboardId: z.string().min(1, "Billboard id is required"),
-});
-
 /**
  * Handles patch requests to update store by storeId.
  * @example curl -X PATCH http://localhost:3000/api/storeId/categories/categoryId
@@ -72,14 +66,6 @@ export async function PATCH(
 
     if (!billboardId) {
       return new NextResponse("Billboard is required", { status: 400 });
-    }
-
-    const result = CategoryUpdateSchema.safeParse({ name, billboardId });
-    if (!result.success) {
-      return new NextResponse(
-        result.error.errors.map((e) => e.message).join(", "),
-        { status: 400 },
-      );
     }
 
     const storeByStoreIdAndUserId = await getStoreByStoreIdAndOrUserId({

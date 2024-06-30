@@ -27,17 +27,17 @@ import {
 } from "@/components/index";
 import { capitalize } from "@/lib";
 
-type SettingsFormProps = {
+type Props = {
   initialData: Store;
 };
 
-const formSchema = z.object({
-  name: z.string().min(1),
+const settingsFormSchema = z.object({
+  name: z.string().min(1, "Name is required"),
 });
 
-type SettingFormValues = z.infer<typeof formSchema>;
+type FormValues = z.infer<typeof settingsFormSchema>;
 
-const SettingsForm: FC<SettingsFormProps> = ({ initialData }) => {
+const SettingsForm: FC<Props> = ({ initialData }) => {
   const params = useParams();
   const router = useRouter();
   const origin = useOrigin();
@@ -45,12 +45,12 @@ const SettingsForm: FC<SettingsFormProps> = ({ initialData }) => {
   const [open, setOpen] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(false);
 
-  const form = useForm<SettingFormValues>({
-    resolver: zodResolver(formSchema),
+  const form = useForm<FormValues>({
+    resolver: zodResolver(settingsFormSchema),
     defaultValues: initialData,
   });
 
-  const handleUpdate = async (data: SettingFormValues) => {
+  const handleUpdate = async (data: FormValues) => {
     try {
       setLoading(true);
       const response = await axios.patch(

@@ -1,4 +1,4 @@
-import BillBoardForm from "./components/billboard-form";
+import BillboardForm from "./components/billboard-form";
 import { findBillboardById } from "@/services";
 
 const CreateBillboardPage = async ({
@@ -13,7 +13,7 @@ const CreateBillboardPage = async ({
   return (
     <div className="flex-col">
       <div className="flex-1 space-y-4 p-8 pt-6">
-        <BillBoardForm initialData={billboard} />
+        <BillboardForm initialData={billboard} />
       </div>
     </div>
   );

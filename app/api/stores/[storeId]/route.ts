@@ -1,13 +1,8 @@
 import { NextResponse } from "next/server";
 import { auth } from "@clerk/nextjs/server";
-import { z } from "zod";
 import { handleError } from "@/lib";
 import type { Store } from "@prisma/client";
 import { deleteStore, findStoreByStoreIdUserId, updateStore } from "@/services";
-
-const StoreUpdateSchema = z.object({
-  name: z.string().min(1, "Name is required"),
-});
 
 /**
  * Handles patch requests to update store by storeId.
@@ -23,14 +18,6 @@ export async function PATCH(
 
     const { name }: Store = await req.json();
     if (!name) return new NextResponse("Name is required", { status: 400 });
-
-    const zodValidation = StoreUpdateSchema.safeParse({ name });
-    if (!zodValidation.success) {
-      return new NextResponse(
-        zodValidation.error.errors.map((e) => e.message).join(", "),
-        { status: 400 },
-      );
-    }
 
     if (!params.storeId) {
       return new NextResponse("Store id is required", { status: 400 });

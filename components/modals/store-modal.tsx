@@ -20,24 +20,24 @@ import {
   FormMessage,
 } from "@/components/index";
 
-const formSchema = z.object({
-  name: z.string().min(1),
+const storeFormSchema = z.object({
+  name: z.string().min(1, "Name is required"),
 });
 
-type SettingFormValues = z.infer<typeof formSchema>;
+type FormValues = z.infer<typeof storeFormSchema>;
 
 export const StoreModal = () => {
   const { isOpen, onClose } = useStoreModal();
   const [loading, setLoading] = useState<boolean>(false);
 
-  const form = useForm<SettingFormValues>({
-    resolver: zodResolver(formSchema),
+  const form = useForm<FormValues>({
+    resolver: zodResolver(storeFormSchema),
     defaultValues: {
       name: "",
     },
   });
 
-  const onSubmit = async (values: SettingFormValues) => {
+  const onSubmit = async (values: FormValues) => {
     try {
       setLoading(false);
 

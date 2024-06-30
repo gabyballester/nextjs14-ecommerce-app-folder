@@ -5,13 +5,13 @@ import { Plus } from "lucide-react";
 import { useParams, useRouter } from "next/navigation";
 
 import { ApiUrlList, Button, Heading, Separator } from "@/components/index";
-import { CategoryColumn, DataTable, columns } from "./table";
+import { SizeColumn, SizeDataTable, sizeColumns } from "./table";
 
 interface Props {
-  data: CategoryColumn[];
+  data: SizeColumn[];
 }
 
-export const CategoriesClient: FC<Props> = ({ data }) => {
+export const SizeClient: FC<Props> = ({ data }) => {
   const params = useParams();
   const router = useRouter();
 
@@ -19,28 +19,28 @@ export const CategoriesClient: FC<Props> = ({ data }) => {
     <>
       <div className="flex items-center justify-between">
         <Heading
-          title={`Categories (${data.length})`}
-          description="Manage categories on your store"
+          title={`Sizes (${data.length})`}
+          description="Manage sizes for your store"
         />
         <Button
           size="sm"
           disabled={false}
-          onClick={() => router.push(`/${params?.storeId}/categories/new`)}
+          onClick={() => router.push(`/${params?.storeId}/sizes/new`)}
         >
           <Plus className="mr-2 h-4 w-4" />
           Add New
         </Button>
       </div>
       <Separator />
-      <DataTable
+      <SizeDataTable
         searchKey="name"
         showPagination={true}
-        columns={columns}
+        columns={sizeColumns}
         data={data}
       />
-      <Heading title={"API"} description={"API calls for Categories"}></Heading>
+      <Heading title={"API"} description={"API calls for Sizes"}></Heading>
       <Separator />
-      <ApiUrlList entityName={"categories"} entityIdName={"categoryId"} />
+      <ApiUrlList entityName={"sizes"} entityIdName={"sizeId"} />
     </>
   );
 };

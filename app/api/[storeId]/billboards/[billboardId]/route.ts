@@ -1,6 +1,5 @@
 import { NextResponse } from "next/server";
 import { auth } from "@clerk/nextjs/server";
-import { z } from "zod";
 import { handleError } from "@/lib";
 
 import type { Billboard } from "@prisma/client";
@@ -39,11 +38,6 @@ export async function GET(
   }
 }
 
-const BillboardUpdateSchema = z.object({
-  label: z.string().min(1, "Name is required"),
-  imageUrl: z.string().min(1, "Name is required"),
-});
-
 /**
  * Handles patch requests to update store by storeId.
  * @example curl -X PATCH http://localhost:3000/api/storeId/billboards/billboardId
@@ -72,14 +66,6 @@ export async function PATCH(
 
     if (!imageUrl) {
       return new NextResponse("Image url is required", { status: 400 });
-    }
-
-    const result = BillboardUpdateSchema.safeParse({ label, imageUrl });
-    if (!result.success) {
-      return new NextResponse(
-        result.error.errors.map((e) => e.message).join(", "),
-        { status: 400 },
-      );
     }
 
     const storeByStoreIdAndUserId = await getStoreByStoreIdAndOrUserId({
