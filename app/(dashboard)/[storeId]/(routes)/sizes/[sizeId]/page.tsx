@@ -1,7 +1,7 @@
 import SizeForm from "./components/size-form";
 import { findSizeById } from "@/services";
 
-const CreateSizePage = async ({ params }: { params: { sizeId: string } }) => {
+const SizePage = async ({ params }: { params: { sizeId: string } }) => {
   const sizes = await findSizeById({
     sizeId: params.sizeId,
   });
@@ -15,4 +15,4 @@ const CreateSizePage = async ({ params }: { params: { sizeId: string } }) => {
   );
 };
 
-export default CreateSizePage;
+export default SizePage;

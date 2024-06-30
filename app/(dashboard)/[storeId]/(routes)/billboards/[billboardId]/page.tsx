@@ -1,7 +1,7 @@
 import BillboardForm from "./components/billboard-form";
 import { findBillboardById } from "@/services";
 
-const CreateBillboardPage = async ({
+const BillboardPage = async ({
   params,
 }: {
   params: { billboardId: string };
@@ -19,4 +19,4 @@ const CreateBillboardPage = async ({
   );
 };
 
-export default CreateBillboardPage;
+export default BillboardPage;

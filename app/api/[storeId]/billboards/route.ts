@@ -47,7 +47,7 @@ export async function POST(
 
     return NextResponse.json(billboard);
   } catch (error) {
-    console.log("[BILLBOARDS_POST]", error);
+    console.log("[BILLBOARD_POST]", error);
     return handleError(error);
   }
 }

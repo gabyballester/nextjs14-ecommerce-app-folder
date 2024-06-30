@@ -1,7 +1,7 @@
 import CategoryForm from "./components/category-form";
 import { findBillboardsByStoreId, findCategorydById } from "@/services";
 
-const CreateCategoryPage = async ({
+const CategoryPage = async ({
   params,
 }: {
   params: { categoryId: string; storeId: string };
@@ -24,4 +24,4 @@ const CreateCategoryPage = async ({
   );
 };
 
-export default CreateCategoryPage;
+export default CategoryPage;
