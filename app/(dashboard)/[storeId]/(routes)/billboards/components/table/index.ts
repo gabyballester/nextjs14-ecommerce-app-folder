@@ -1,3 +1,3 @@
-export * from "./columns";
-export * from "./data-table";
-export * from "./cell-action";
+export * from "./billboard-columns";
+export * from "./billboard-data-table";
+export * from "./billboard-cell-action";

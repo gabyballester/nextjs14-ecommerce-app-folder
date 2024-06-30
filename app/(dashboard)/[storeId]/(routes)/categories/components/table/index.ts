@@ -1,3 +1,3 @@
-export * from "./columns";
-export * from "./data-table";
-export * from "./cell-action";
+export * from "./category-columns";
+export * from "./category-data-table";
+export * from "./category-cell-action";

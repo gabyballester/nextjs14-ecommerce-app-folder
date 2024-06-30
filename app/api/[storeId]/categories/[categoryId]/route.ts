@@ -102,7 +102,7 @@ export async function PATCH(
 
     return NextResponse.json(category);
   } catch (error) {
-    console.log("[BILLBOARD_UPDATE]", error);
+    console.log("[CATEGORY_UPDATE]", error);
     return handleError(error);
   }
 }
@@ -146,7 +146,7 @@ export async function DELETE(
 
     return NextResponse.json(category);
   } catch (error) {
-    console.log("[BILLBOARD_DELETE]", error);
+    console.log("[CATEGORY_DELETE]", error);
     return handleError(error);
   }
 }

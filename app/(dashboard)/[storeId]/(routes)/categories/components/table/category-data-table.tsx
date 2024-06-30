@@ -29,7 +29,7 @@ interface DataTableProps<TData, TValue> {
   showPagination: boolean;
 }
 
-export function DataTable<TData, TValue>({
+export function CategoryDataTable<TData, TValue>({
   columns,
   data,
   searchKey,

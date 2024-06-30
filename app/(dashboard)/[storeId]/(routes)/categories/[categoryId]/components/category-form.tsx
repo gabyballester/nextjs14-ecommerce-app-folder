@@ -69,17 +69,17 @@ const CategoryForm: FC<CategoryFormProps> = ({ initialData, billboards }) => {
   if (!params || !params.storeId || !params.categoryId) return null;
 
   const onSubmit = async (data: CategoryFormValues) => {
+    const updateUrl = `/api/${params?.storeId}/categories/${params?.categoryId}`;
+    const createUrl = `/api/${params?.storeId}/categories`;
+
     let response;
 
     try {
       setLoading(true);
       if (initialData) {
-        response = await axios.patch(
-          `/api/${params?.storeId}/categories/${params?.categoryId}`,
-          data,
-        );
+        response = await axios.patch(updateUrl, data);
       } else {
-        response = await axios.post(`/api/${params?.storeId}/categories`, data);
+        response = await axios.post(createUrl, data);
       }
 
       if (response.statusText !== "OK") throw new Error();

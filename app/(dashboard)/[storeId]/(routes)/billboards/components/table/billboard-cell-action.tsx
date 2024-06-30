@@ -5,7 +5,7 @@ import { useParams, useRouter } from "next/navigation";
 import axios from "axios";
 import { toast } from "react-hot-toast";
 import { Copy, Edit, MoreHorizontal, Trash } from "lucide-react";
-import { BillboardColumn } from "./columns";
+import { BillboardColumn } from "./billboard-columns";
 import {
   ConfirmModal,
   Button,
@@ -20,7 +20,7 @@ interface Props {
   data: BillboardColumn;
 }
 
-export const CellAction: FC<Props> = ({ data }) => {
+export const BillboardCellAction: FC<Props> = ({ data }) => {
   const router = useRouter();
   const params = useParams();
 

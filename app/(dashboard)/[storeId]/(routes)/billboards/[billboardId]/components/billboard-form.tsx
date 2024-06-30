@@ -64,17 +64,17 @@ const BillBoardForm: FC<BillbordFormProps> = ({ initialData }) => {
   if (!params || !params.storeId || !params.billboardId) return null;
 
   const onSubmit = async (data: BillboardFormValues) => {
+    const updateUrl = `/api/${params?.storeId}/billboards/${params?.billboardId}`;
+    const createUrl = `/api/${params?.storeId}/billboards`;
+
     let response;
 
     try {
       setLoading(true);
       if (initialData) {
-        response = await axios.patch(
-          `/api/${params?.storeId}/billboards/${params?.billboardId}`,
-          data,
-        );
+        response = await axios.patch(updateUrl, data);
       } else {
-        response = await axios.post(`/api/${params?.storeId}/billboards`, data);
+        response = await axios.post(createUrl, data);
       }
 
       if (response.statusText !== "OK") throw new Error();

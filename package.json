@@ -8,11 +8,10 @@
     "start": "next start",
     "lint": "next lint",
     "lint:fix": "next lint --fix",
-    "test:all:coverage": "jest --coverage",
+    "test": "jest --coverage",
     "test:watch": "jest --watch --coverage",
-    "test:watchAll": "jest --watchAll --coverage",
+    "test:watch:all": "jest --watchAll --coverage",
     "pre-commit": "npx lint-staged",
-    "allTests": "npm run test:all:coverage",
     "prettier": "prettier --write */**/*.{js,jsx,json,ts,tsx,scss,css,md}",
     "prepare": "husky",
     "cypress:open": "cypress open"
