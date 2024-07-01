@@ -43,17 +43,15 @@ const SizeForm: FC<Props> = ({ initialData }) => {
   const [open, setOpen] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(false);
 
-  const emptySize: Partial<Size> = {
-    name: "",
-    value: "",
-    createdAt: new Date(),
-    updatedAt: new Date(),
-  };
-
   const title = initialData ? "Edit size" : "Create size";
   const description = initialData ? "Edit a size" : "Create a size";
   const toastMessage = initialData ? "Size updated" : "Size created";
   const action = initialData ? "Update" : "Create";
+
+  const emptySize: FormValues = {
+    name: "",
+    value: "",
+  };
 
   const form = useForm<FormValues>({
     resolver: zodResolver(sizeFormSchema),

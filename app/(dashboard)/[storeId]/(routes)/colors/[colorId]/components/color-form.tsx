@@ -43,17 +43,15 @@ const ColorForm: FC<Props> = ({ initialData }) => {
   const [open, setOpen] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(false);
 
-  const emptyColor: Partial<Color> = {
-    name: "",
-    value: "",
-    createdAt: new Date(),
-    updatedAt: new Date(),
-  };
-
   const title = initialData ? "Edit color" : "Create color";
   const description = initialData ? "Edit a color" : "Create a color";
   const toastMessage = initialData ? "Color updated" : "Color created";
   const action = initialData ? "Update" : "Create";
+
+  const emptyColor: FormValues = {
+    name: "",
+    value: "",
+  };
 
   const form = useForm<FormValues>({
     resolver: zodResolver(colorFormSchema),

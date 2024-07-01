@@ -1,5 +1,5 @@
 import { prismadb } from "@/prisma/prisma.client";
-import { CategoryIncludingBillboard } from "@/types";
+import { CategoryExtended } from "@/types";
 import { Category } from "@prisma/client";
 
 export async function findCategorydById({
@@ -41,7 +41,7 @@ export async function findCategoriesByStoreIdIncludingBillboard({
 }: {
   storeId: string;
   order: "asc" | "desc";
-}): Promise<CategoryIncludingBillboard[]> {
+}): Promise<CategoryExtended[]> {
   if (!storeId) {
     throw new Error("Store id must be provided");
   }

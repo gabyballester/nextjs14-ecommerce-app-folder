@@ -49,17 +49,15 @@ const CategoryForm: FC<Props> = ({ initialData, billboards }) => {
   const [open, setOpen] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(false);
 
-  const emptyCategory: Partial<Category> = {
-    name: "",
-    billboardId: "",
-    createdAt: new Date(),
-    updatedAt: new Date(),
-  };
-
   const title = initialData ? "Edit category" : "Create category";
   const description = initialData ? "Edit a category" : "Create a category";
   const toastMessage = initialData ? "Category updated" : "Category created";
   const action = initialData ? "Update" : "Create";
+
+  const emptyCategory: FormValues = {
+    name: "",
+    billboardId: "",
+  };
 
   const form = useForm<FormValues>({
     resolver: zodResolver(categoryFormSchema),

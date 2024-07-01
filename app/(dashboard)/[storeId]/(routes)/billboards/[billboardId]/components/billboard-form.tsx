@@ -44,17 +44,15 @@ const BillboardForm: FC<Pros> = ({ initialData }) => {
   const [open, setOpen] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(false);
 
-  const emptyBillboard: Partial<Billboard> = {
-    label: "",
-    imageUrl: "",
-    createdAt: new Date(),
-    updatedAt: new Date(),
-  };
-
   const title = initialData ? "Edit billboard" : "Create billboard";
   const description = initialData ? "Edit a billboard" : "Create a billboard";
   const toastMessage = initialData ? "Billboard updated" : "Billboard created";
   const action = initialData ? "Update" : "Create";
+
+  const emptyBillboard: FormValues = {
+    label: "",
+    imageUrl: "",
+  };
 
   const form = useForm<FormValues>({
     resolver: zodResolver(billboardFormSchema),

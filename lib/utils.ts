@@ -22,3 +22,8 @@ export const handleError = <T extends Record<string, any>>(
     status: 500,
   });
 };
+
+export const currency = new Intl.NumberFormat("es-ES", {
+  style: "currency",
+  currency: "EUR",
+});

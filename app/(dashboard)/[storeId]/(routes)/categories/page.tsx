@@ -2,10 +2,10 @@ import { findCategoriesByStoreIdIncludingBillboard } from "@/services";
 import { CategoryClient } from "./components/category-client";
 import { mapCategoryToColumn } from "@/mappers";
 import { CategoryColumn } from "./components/table";
-import { CategoryIncludingBillboard } from "@/types";
+import { CategoryExtended } from "@/types";
 
 const CategoriesPage = async ({ params }: { params: { storeId: string } }) => {
-  const categories: CategoryIncludingBillboard[] =
+  const categories: CategoryExtended[] =
     await findCategoriesByStoreIdIncludingBillboard({
       storeId: params.storeId,
       order: "desc",
